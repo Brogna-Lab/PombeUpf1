@@ -1,0 +1,36 @@
+---
+title: ""
+output:
+  html_document: default
+  pdf_document: default
+---
+#Making a ChIP-seq coverage depth metagene from .SAM files
+
+##Introduction
+
+This report will describe how to use the python scripts presented to generate metagene plots of base-wise sequence coverage depth from .SAM files.
+
+##Converting .SAM files into the .PICKLE format
+
+Initially, one must obtain the base-wise coverage depth values from the .SAM files for the relevant immuno-precipitation (IP) and corresponding input control sequencing samples. This is done using the "samToPickle.py" Python script, requiring installation of python3. This code has several required arguements as outlined in a generalised manner below, requiring a sam and appropriate gtf file as input and generating a pickle file (Python-specific format).
+
+```{r eval=FALSE, echo=TRUE, warning=FALSE, message=FALSE}
+python3 samToPickle.py <path_to_sam_file> <path_to_gtf_file> <path_to_pickle_output_file> <size_of_flanking_regions>
+```
+
+The final arguement refers to how much of the sequences flanking genes should be processed for inclusion in the plot. In our analysis we used 1000, which specifies that the flanking regions should span 1000bp up and down -stream of the TSS and TES, respectively.
+
+##Producing a metagene .PDF plot from .PICKLE files
+
+The next step is to take the single-base resolution coverage depth values for each gene from the .PICKLE files and average them across all genes of interest. This is done for both the IP and input files, before normalising the IP values by dividing by the input values. The resulting position-averaged and normalised coverage depth values are then plotted and saved to a .PDF file.
+
+This is accomplished using the "pickleToMetagene.py" Python script. This script can also be fed a a single column plain .TXT file with one gene ID per row. This facilitates the specification of a set of genes from which the metagene should be constructed. The example gene set .TXT file ("geneList.txt") only includes the most highly expressed protein coding genes in S. pombe (made with the "geneSetListMaker.py" script and the "Rep1.txt" and "Rep2.txt" downloaded RNA-seq data files). The generalised form of the command is as follows.
+
+```{r eval=FALSE, echo=TRUE, warning=FALSE, message=FALSE}
+python3 pickleToMetagene.py <path_to_gtf_file> <path_to_pickle_IP_file> <path_to_pickle_input_file> <size_of_flanking_regions> <path_to_plot_output_file> <True/False_for_inclusion_of_specific_gene_set> <path_to_gene_set_txt_file>
+```
+
+The flanking region size setting must be the same as the one used to generate the .PICKLE files. A specific gene set .TXT file need not be included, in which case the second last arguement must be set to "False" and the last arguement ignored. In this case, the script will construct the metagene using the coverage depth values corresponding to every gene listed in the .GTF file.
+
+Alternatively, if a specific gene set is to be provided, the second last arguement must be set to "True" and the last arguement set as the path to the .TXT file containing the gene list. Then only genes contained in both the .GTF file and the list will be included in the final plot.
+
