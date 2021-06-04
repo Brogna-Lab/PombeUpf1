@@ -32,6 +32,8 @@ for line in gtfContents:
         end = int(line[4])
         genesByChromosome[chromosome][geneID] = (strand, start, end)
 
+pickle.dump(genesByChromosome, open("genesByChromosome.pickle", "wb"))
+
 maxChromosomeBasePositions = {chromosome: numpy.max([genesByChromosome[chromosome][geneID][2] for geneID in genesByChromosome[chromosome].keys()]) + 20000 for chromosome in chromosomes}
 
 #now make a dictionary for every base in the genome
