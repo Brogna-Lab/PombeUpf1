@@ -3,12 +3,13 @@ title: ""
 output:
   html_document: default
   pdf_document: default
+bibliography: ref.bib 
 ---
 # Making a ChIP-seq coverage depth metagene from .SAM files
 
 ## Introduction
 
-This report will describe how to use the python scripts presented to generate metagene plots of base-wise sequence coverage depth from .SAM files.
+This report will describe how to use the python scripts presented to generate metagene plots of base-wise sequence coverage depth from .SAM files @de2021genome, @edwards2021genome.
 
 ## Converting .SAM files into the .PICKLE format
 
@@ -43,3 +44,5 @@ python3 pickleToIndividualGenePlots.py <path_to_pickle_IP_file> <path_to_pickle_
 ```
 
 As before, the flanking region size must be the same as the one used when producing the pickle files from the sam files and a path to a text file containing a list of genes is now required to be provided. A path to a directory for the .PDF output files must also be provided.
+
+## References

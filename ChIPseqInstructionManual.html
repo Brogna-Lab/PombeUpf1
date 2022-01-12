@@ -56,6 +56,28 @@ if (window.hljs) {
 
 
 
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 
 
@@ -171,7 +193,7 @@ pre code {
 <h1>Making a ChIP-seq coverage depth metagene from .SAM files</h1>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>This report will describe how to use the python scripts presented to generate metagene plots of base-wise sequence coverage depth from .SAM files.</p>
+<p>This report will describe how to use the python scripts presented to generate metagene plots of base-wise sequence coverage depth from .SAM files <span class="citation">De, Dwivedi, et al. (2021)</span>, <span class="citation">De, Edwards, et al. (2021)</span>.</p>
 </div>
 <div id="converting-.sam-files-into-the-.pickle-format" class="section level2">
 <h2>Converting .SAM files into the .PICKLE format</h2>
@@ -192,6 +214,17 @@ pre code {
 <p>One may also produce plots displaying gene-specfic normalised coverage depth values by using the “pickleToIndividualGenePlots.py” Python script. This take the data contained within the pickle files for the IP and input control along with a file containing set of desired genes to produce plots for, similar to the metagene plotting script. However, instead of averaging the values across the set of genes, the script will produce one plot per gene. An example list of three genes can be found in “geneList2.txt” to run the script on. The command to execute the script must be given as follows.</p>
 <pre class="r"><code>python3 pickleToIndividualGenePlots.py &lt;path_to_pickle_IP_file&gt; &lt;path_to_pickle_input_file&gt; &lt;size_of_flanking_regions&gt; &lt;path_to_plot_output_directory&gt; &lt;path_to_gene_set_txt_file&gt;</code></pre>
 <p>As before, the flanking region size must be the same as the one used when producing the pickle files from the sam files and a path to a text file containing a list of genes is now required to be provided. A path to a directory for the .PDF output files must also be provided.</p>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2 class="unnumbered">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-de2021genome" class="csl-entry">
+De, Sandip, Vibha Dwivedi, Jianming Wang, David M Edwards, Wazeer Versally, Anand K Singh, Hannah L Dixon, et al. 2021. <span>“Genome-Wide Chromosomal Association of Upf1 Is Linked to Pol II Transcription in Schizosaccharomyces Pombe.”</span> <em>bioRxiv</em>.
+</div>
+<div id="ref-edwards2021genome" class="csl-entry">
+De, Sandip, David M Edwards, Vibha Dwivedi, Jianming Wang, Wazeer Varsally, Hannah L Dixon, Anand K Singh, et al. 2021. <span>“Genome-Wide Chromosomal Association of Upf1 Is Linked to Pol II Transcription in Schizosaccharomyces Pombe.”</span> <em>Nucleic Acids Research</em>.
+</div>
+</div>
 </div>
 </div>
 
